@@ -1,13 +1,19 @@
 package pl.sdacademy.spring.car_dealer.controller;
 
+import org.springframework.stereotype.Controller;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.service.SellingService;
 
 import java.util.Scanner;
 
+@Controller
 public class SellingController {
 
-    private SellingService sellingService;
+    private final SellingService sellingService;
+
+    SellingController(SellingService sellingService) {
+        this.sellingService = sellingService;
+    }
 
     public void buyVehicle(Long vehicleId) {
         Customer customer = getCustomerData();
@@ -42,9 +48,5 @@ public class SellingController {
 
     private String readInput() {
         return new Scanner(System.in).nextLine();
-    }
-
-    public void setSellingService(SellingService sellingService) {
-        this.sellingService = sellingService;
     }
 }

@@ -1,14 +1,21 @@
 package pl.sdacademy.spring.car_dealer;
 
+import org.springframework.stereotype.Component;
 import pl.sdacademy.spring.car_dealer.controller.CarDataController;
 import pl.sdacademy.spring.car_dealer.controller.SellingController;
 
 import java.util.Scanner;
 
+@Component
 public class Application {
 
-    private CarDataController carDataController = null;
-    private SellingController sellingController = null;
+    private final CarDataController carDataController;
+    private final SellingController sellingController;
+
+    Application(CarDataController carDataController, SellingController sellingController) {
+        this.carDataController = carDataController;
+        this.sellingController = sellingController;
+    }
 
     public void start() {
         Long choice = -1L;
@@ -49,13 +56,5 @@ public class Application {
         } catch (NumberFormatException e) {
             return -1L;
         }
-    }
-
-    public void setCarDataController(CarDataController carDataController) {
-        this.carDataController = carDataController;
-    }
-
-    public void setSellingController(SellingController sellingController) {
-        this.sellingController = sellingController;
     }
 }

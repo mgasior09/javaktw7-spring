@@ -1,13 +1,18 @@
 package pl.sdacademy.spring.car_dealer.repository;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
+import pl.sdacademy.spring.car_dealer.qualifier.HardDriveStorage;
 
 import java.util.List;
 
+@Repository
+@HardDriveStorage
 public class HardDrivePurchaseRepository extends AbstractHardDriveRepository<Purchase> implements PurchaseRepository {
-    private final String repositoryLocation ;
+    private final String repositoryLocation;
 
-    public HardDrivePurchaseRepository(String repositoryLocation) {
+   HardDrivePurchaseRepository(@Value("${repository.purchase.hardDrive.fileLocation}") String repositoryLocation) {
         this.repositoryLocation = repositoryLocation;
     }
 
@@ -30,10 +35,12 @@ public class HardDrivePurchaseRepository extends AbstractHardDriveRepository<Pur
     protected String getRepositoryLocation() {
         return repositoryLocation;
     }
+
     public void initialize() {
         System.out.println("Initializing repository");
     }
-    public void cleanUp () {
+
+    public void cleanUp() {
         System.out.println("Cleaning up repository");
     }
 }

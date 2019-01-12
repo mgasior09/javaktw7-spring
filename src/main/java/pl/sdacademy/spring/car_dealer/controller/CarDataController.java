@@ -1,14 +1,20 @@
 package pl.sdacademy.spring.car_dealer.controller;
 
+import org.springframework.stereotype.Controller;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
 import pl.sdacademy.spring.car_dealer.service.CarDataService;
 
 import java.util.Comparator;
 import java.util.List;
 
+@Controller
 public class CarDataController {
 
-    private CarDataService carDataService;
+    private final CarDataService carDataService;
+
+    CarDataController(CarDataService carDataService) {
+        this.carDataService = carDataService;
+    }
 
     public void printAvailableCars() {
         List<Vehicle> vehicles = carDataService.loadCarsThatCanBeSold();
@@ -23,9 +29,5 @@ public class CarDataController {
                     vehicle.getMileage(),
                     vehicle.getPrice()));
         });
-    }
-
-    public void setCarDataService(CarDataService carDataService) {
-        this.carDataService = carDataService;
     }
 }

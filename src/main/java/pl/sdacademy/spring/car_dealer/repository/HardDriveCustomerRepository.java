@@ -1,13 +1,18 @@
 package pl.sdacademy.spring.car_dealer.repository;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 import pl.sdacademy.spring.car_dealer.model.Customer;
+import pl.sdacademy.spring.car_dealer.qualifier.HardDriveStorage;
 
 import java.util.List;
 
+@Repository
+@HardDriveStorage
 public class HardDriveCustomerRepository extends AbstractHardDriveRepository<Customer> implements CustomerRepository {
     private final String repositoryLocation;
 
-    public HardDriveCustomerRepository(String repositoryLocation) {
+   HardDriveCustomerRepository(@Value("${repository.customer.hardDrive.fileLocation}") String repositoryLocation) {
         this.repositoryLocation = repositoryLocation;
     }
 
