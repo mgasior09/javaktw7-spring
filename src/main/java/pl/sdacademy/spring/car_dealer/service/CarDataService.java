@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CarDataService {
     List<Vehicle> loadCarsThatCanBeSold();
-    void setVehicleRepository(VehicleRepository vehicleRepository);
+
 }

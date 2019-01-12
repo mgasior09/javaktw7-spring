@@ -7,7 +7,11 @@ import java.util.stream.Collectors;
 
 public class HardDriveVehicleRepository extends AbstractHardDriveRepository<Vehicle> implements VehicleRepository {
 
-    private final String repositoryLocation = "vehicles.ser";
+    private final String repositoryLocation;
+
+    public HardDriveVehicleRepository(String repositoryLocation) {
+        this.repositoryLocation = repositoryLocation;
+    }
 
     @Override
     public Vehicle byId(Long id) {
@@ -31,6 +35,12 @@ public class HardDriveVehicleRepository extends AbstractHardDriveRepository<Vehi
         filteredOutVehicles.add(newVehicle);
         saveAllElements(filteredOutVehicles);
         return newVehicle;
+    }
+    public void initialize() {
+        System.out.println("Initializing repository");
+    }
+    public void cleanUp () {
+        System.out.println("Cleaning up repository");
     }
 
     @Override

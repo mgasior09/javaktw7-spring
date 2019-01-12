@@ -12,8 +12,9 @@ public class DefaultCarDataService implements CarDataService {
         return vehicleRepository.getAvailable();
     }
 
-    @Override
-    public void setVehicleRepository(VehicleRepository vehicleRepository) {
+    public DefaultCarDataService(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
+
+
 }

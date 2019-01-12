@@ -31,18 +31,9 @@ public class DefaultSellingService implements SellingService {
         return purchaseRepository.add(purchase);
     }
 
-    @Override
-    public void setVehicleRepository(VehicleRepository vehicleRepository) {
+    public DefaultSellingService(VehicleRepository vehicleRepository, CustomerRepository customerRepository, PurchaseRepository purchaseRepository) {
         this.vehicleRepository = vehicleRepository;
-    }
-
-    @Override
-    public void setCustomerRepository(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-    }
-
-    @Override
-    public void setPurchaseRepository(PurchaseRepository purchaseRepository) {
         this.purchaseRepository = purchaseRepository;
     }
 }

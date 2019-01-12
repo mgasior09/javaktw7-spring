@@ -5,7 +5,11 @@ import pl.sdacademy.spring.car_dealer.model.Purchase;
 import java.util.List;
 
 public class HardDrivePurchaseRepository extends AbstractHardDriveRepository<Purchase> implements PurchaseRepository {
-    private final String repositoryLocation = "purchases.ser";
+    private final String repositoryLocation ;
+
+    public HardDrivePurchaseRepository(String repositoryLocation) {
+        this.repositoryLocation = repositoryLocation;
+    }
 
     @Override
     public List<Purchase> getAll() {
@@ -25,5 +29,11 @@ public class HardDrivePurchaseRepository extends AbstractHardDriveRepository<Pur
     @Override
     protected String getRepositoryLocation() {
         return repositoryLocation;
+    }
+    public void initialize() {
+        System.out.println("Initializing repository");
+    }
+    public void cleanUp () {
+        System.out.println("Cleaning up repository");
     }
 }

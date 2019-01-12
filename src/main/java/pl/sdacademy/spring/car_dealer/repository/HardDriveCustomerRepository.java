@@ -5,7 +5,11 @@ import pl.sdacademy.spring.car_dealer.model.Customer;
 import java.util.List;
 
 public class HardDriveCustomerRepository extends AbstractHardDriveRepository<Customer> implements CustomerRepository {
-    private final String repositoryLocation = "customers.ser";
+    private final String repositoryLocation;
+
+    public HardDriveCustomerRepository(String repositoryLocation) {
+        this.repositoryLocation = repositoryLocation;
+    }
 
     public Customer byId(Long id) {
         return loadAllElements().stream().filter(customer -> customer.getId().equals(id)).findAny().orElse(null);
@@ -23,5 +27,13 @@ public class HardDriveCustomerRepository extends AbstractHardDriveRepository<Cus
     @Override
     protected String getRepositoryLocation() {
         return repositoryLocation;
+    }
+
+    public void initialize() {
+        System.out.println("Initializing repository");
+    }
+
+    public void cleanUp() {
+        System.out.println("Cleaning up repository");
     }
 }

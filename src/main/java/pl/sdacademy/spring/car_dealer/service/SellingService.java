@@ -8,7 +8,5 @@ import pl.sdacademy.spring.car_dealer.repository.VehicleRepository;
 
 public interface SellingService {
     Purchase sell(Long vehicleId, Customer customer, Long price);
-    void setVehicleRepository(VehicleRepository vehicleRepository);
-    void setCustomerRepository(CustomerRepository customerRepository);
-    void setPurchaseRepository(PurchaseRepository purchaseRepository);
+
 }
