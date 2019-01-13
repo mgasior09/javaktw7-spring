@@ -1,16 +1,15 @@
 package pl.sdacademy.spring.car_dealer.service;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
-import pl.sdacademy.spring.car_dealer.qualifier.HardDriveStorage;
-import pl.sdacademy.spring.car_dealer.repository.CustomerRepository;
-import pl.sdacademy.spring.car_dealer.repository.PurchaseRepository;
-import pl.sdacademy.spring.car_dealer.repository.VehicleRepository;
+import pl.sdacademy.spring.car_dealer.repository.interfaces.CustomerRepository;
+import pl.sdacademy.spring.car_dealer.repository.interfaces.PurchaseRepository;
+import pl.sdacademy.spring.car_dealer.repository.interfaces.VehicleRepository;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class DefaultSellingService implements SellingService {
@@ -19,25 +18,27 @@ public class DefaultSellingService implements SellingService {
     private final CustomerRepository customerRepository;
     private final PurchaseRepository purchaseRepository;
 
-    public Purchase sell(Long vehicleId, Customer customer, Long price) {
-        Vehicle vehicle = vehicleRepository.byId(vehicleId);
-        if (vehicle == null) {
-            return null;
-        }
-        vehicle.setSold(true);
-        vehicleRepository.update(vehicle);
-        customer = customerRepository.add(customer);
-        Purchase purchase = new Purchase();
-        purchase.setVehicle(vehicle);
-        purchase.setCustomer(customer);
-        purchase.setDate(new Date());
-        purchase.setPrice(price);
-        return purchaseRepository.add(purchase);
-    }
-
-    DefaultSellingService(VehicleRepository vehicleRepository, @HardDriveStorage CustomerRepository customerRepository, PurchaseRepository purchaseRepository) {
+    DefaultSellingService(VehicleRepository vehicleRepository, CustomerRepository customerRepository, PurchaseRepository purchaseRepository) {
         this.vehicleRepository = vehicleRepository;
         this.customerRepository = customerRepository;
         this.purchaseRepository = purchaseRepository;
+    }
+
+    public Purchase sell(Long vehicleId, Customer customer, Long price) {
+        Optional<Vehicle> optionalVehicle = vehicleRepository.findById(vehicleId);
+        if (!optionalVehicle.isPresent()) {
+            return null;
+        } else {
+            Vehicle vehicle = optionalVehicle.get();
+            vehicle.setSold(true);
+            vehicleRepository.save(vehicle);
+            customer = customerRepository.save(customer);
+            Purchase purchase = new Purchase();
+            purchase.setVehicle(vehicle);
+            purchase.setCustomer(customer);
+            purchase.setDate(new Date());
+            purchase.setPrice(price);
+            return purchaseRepository.save(purchase);
+        }
     }
 }

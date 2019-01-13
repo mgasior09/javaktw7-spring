@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import pl.sdacademy.spring.car_dealer.annotation.Finder;
 import pl.sdacademy.spring.car_dealer.model.Customer;
+import pl.sdacademy.spring.car_dealer.repository.finders.CustomerFinder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,5 +45,4 @@ public class JdbcTemplateCustomerFinder implements CustomerFinder {
             return customer;
         }
     }
-
 }

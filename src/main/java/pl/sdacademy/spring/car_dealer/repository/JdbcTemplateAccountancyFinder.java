@@ -4,6 +4,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import pl.sdacademy.spring.car_dealer.annotation.Finder;
+import pl.sdacademy.spring.car_dealer.repository.finders.AccountancyFinder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import java.util.Map;
 public class JdbcTemplateAccountancyFinder implements AccountancyFinder {
     private final JdbcTemplate jdbcTemplate;
 
-    private final String FIND_BY_DATE = "SELECT date, price= FROM Purchase";
+    private final String FIND_BY_DATE = "SELECT date, price FROM Purchase";
 
     public JdbcTemplateAccountancyFinder(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

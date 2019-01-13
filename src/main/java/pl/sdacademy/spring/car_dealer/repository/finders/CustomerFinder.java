@@ -1,4 +1,4 @@
-package pl.sdacademy.spring.car_dealer.repository;
+package pl.sdacademy.spring.car_dealer.repository.finders;
 
 import pl.sdacademy.spring.car_dealer.model.Customer;
 
