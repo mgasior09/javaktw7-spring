@@ -25,20 +25,21 @@ public class DefaultSellingService implements SellingService {
     }
 
     public Purchase sell(Long vehicleId, Customer customer, Long price) {
-        Optional<Vehicle> optionalVehicle = vehicleRepository.findById(vehicleId);
+        Optional<Vehicle> optionalVehicle = vehicleRepository.findAvailableById(vehicleId);
         if (!optionalVehicle.isPresent()) {
             return null;
         } else {
             Vehicle vehicle = optionalVehicle.get();
             vehicle.setSold(true);
             vehicleRepository.save(vehicle);
-            customer = customerRepository.save(customer);
+            Optional<Customer> foundCustomer = customerRepository.findCustomerByDocumentNo(customer.getDocumentNo());
             Purchase purchase = new Purchase();
             purchase.setVehicle(vehicle);
-            purchase.setCustomer(customer);
+            purchase.setCustomer(foundCustomer.orElseGet(() -> customerRepository.save(customer)));
             purchase.setDate(new Date());
             purchase.setPrice(price);
             return purchaseRepository.save(purchase);
+
         }
     }
 }

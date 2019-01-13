@@ -15,6 +15,7 @@ public class SellingController {
         this.sellingService = sellingService;
     }
 
+
     public void buyVehicle(Long vehicleId) {
         Customer customer = getCustomerData();
         Long customerPrice = getCustomerPrice();

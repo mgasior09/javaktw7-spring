@@ -32,25 +32,33 @@ public class CarDataController {
         });
     }
 
-    public void addNewCar() {
+    public void addVehicle() {
+        System.out.println("Adding new vehicle");
         Vehicle vehicle = new Vehicle();
         System.out.println("Enter manufacturer");
-        vehicle.setManufacturer(userInput());
+        vehicle.setManufacturer(readUserInput());
         System.out.println("Enter model");
-        vehicle.setModel(userInput());
-        System.out.println("Enter fuel");
-        vehicle.setFuel(userInput());
+        vehicle.setModel(readUserInput());
+        System.out.println("Set fuel");
+        vehicle.setFuel(readUserInput());
         System.out.println("Set production year");
-        vehicle.setProductionYear(Long.parseLong(userInput()));
+        vehicle.setProductionYear(readNumberUserInput());
         System.out.println("Set mileage");
-        vehicle.setMileage(Long.parseLong(userInput()));
+        vehicle.setMileage(readNumberUserInput());
         System.out.println("Set price");
-        vehicle.setPrice(Long.parseLong(userInput()));
-        vehicle.setSold(false);
+        vehicle.setPrice(readNumberUserInput());
         carDataService.addVehicle(vehicle);
     }
 
-    public String userInput() {
+    public String readUserInput() {
         return new Scanner(System.in).nextLine();
+    }
+
+    public Long readNumberUserInput() {
+        try {
+            return Long.parseLong(new Scanner(System.in).nextLine());
+        } catch (NumberFormatException e) {
+            return -1L;
+        }
     }
 }

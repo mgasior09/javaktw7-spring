@@ -32,7 +32,7 @@ public class Application {
                     sellingController.buyVehicle(vehicleId);
                     break;
                 case 3:
-                    carDataController.addNewCar();
+                    carDataController.addVehicle();
                     break;
                 case 9:
                     break;
