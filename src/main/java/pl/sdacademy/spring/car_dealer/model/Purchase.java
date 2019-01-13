@@ -29,7 +29,7 @@ public class Purchase extends BaseModel implements Serializable {
         return customer;
     }
 
-    public void setCustomer(Customer customerId) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
