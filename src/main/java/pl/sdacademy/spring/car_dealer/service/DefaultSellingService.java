@@ -9,6 +9,7 @@ import pl.sdacademy.spring.car_dealer.repository.interfaces.PurchaseRepository;
 import pl.sdacademy.spring.car_dealer.repository.interfaces.VehicleRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,5 +42,13 @@ public class DefaultSellingService implements SellingService {
             return purchaseRepository.save(purchase);
 
         }
+    }
+
+    public List<Purchase> getPurchases(String documentNo) {
+        return purchaseRepository.findByCustomerDocumentNoEquals(documentNo);
+    }
+
+    public List<Purchase> getPurchases (Long minPrice, Long maxPrice) {
+        return  purchaseRepository.findByPriceBetween(minPrice, maxPrice);
     }
 }

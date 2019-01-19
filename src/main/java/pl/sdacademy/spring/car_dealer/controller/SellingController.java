@@ -2,8 +2,10 @@ package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
 import pl.sdacademy.spring.car_dealer.model.Customer;
+import pl.sdacademy.spring.car_dealer.model.Purchase;
 import pl.sdacademy.spring.car_dealer.service.SellingService;
 
+import java.util.List;
 import java.util.Scanner;
 
 @Controller
@@ -50,4 +52,42 @@ public class SellingController {
     private String readInput() {
         return new Scanner(System.in).nextLine();
     }
+
+    public void printCustomerPurchases() {
+        System.out.print(" Customer document number:");
+        String documentNo = readInput();
+        List<Purchase> customerPurchases = sellingService.getPurchases(documentNo);
+        if (customerPurchases.isEmpty()) {
+            System.out.println("No purchases made");
+        } else {
+            for (Purchase customerPurchase : customerPurchases) {
+                System.out.println(customerPurchase.getDate() + " - " + customerPurchase.getPrice() + "PLN");
+            }
+        }
+
+    }
+
+    private Long readNumberInput() {
+        try {
+            return Long.parseLong(readInput());
+        } catch (NumberFormatException e) {
+            return -1L;
+        }
+    }
+
+    public void printPurchasesFilteredByPrice() {
+        System.out.println("Insert minimal price");
+        Long minPrice = readNumberInput();
+        System.out.println("Insert maximal price");
+        Long maxPrice = readNumberInput();
+        List<Purchase> purchasesBetweenMinAndMaxPrice = sellingService.getPurchases(minPrice, maxPrice);
+        if (purchasesBetweenMinAndMaxPrice.isEmpty()) {
+            System.out.println("No purchases made");
+        } else {
+            for (Purchase purchase : purchasesBetweenMinAndMaxPrice) {
+                System.out.println(purchase.getDate() + " -- " + purchase.getPrice() + "PLN");
+            }
+        }
+    }
 }
+

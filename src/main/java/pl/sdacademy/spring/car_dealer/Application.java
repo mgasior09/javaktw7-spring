@@ -34,13 +34,18 @@ public class Application {
                 case 3:
                     carDataController.addVehicle();
                     break;
+                case 4:
+                    sellingController.printCustomerPurchases();
+                    break;
+                case 5:
+                    sellingController.printPurchasesFilteredByPrice();
+                    break;
                 case 9:
                     break;
                 default:
                     System.out.println("Invalid selection.");
             }
         }
-
     }
 
     private void printMenu() {
@@ -50,6 +55,8 @@ public class Application {
         System.out.println("1) Show Vehicles");
         System.out.println("2) Sell Vehicle");
         System.out.println("3) Add Vehicle");
+        System.out.println("4) Find customer purchases");
+        System.out.println("5) Print purchases by price");
         System.out.println("9) Exit");
         System.out.print("What is your choice? ");
     }
