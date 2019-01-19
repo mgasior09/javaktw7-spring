@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Vehicle details<</title>
+</head>
+<body>
+<h1>Thymeleaf Vehicle details</h1>
+<p>Vehicle details</p>
+<table th:object="${vehicle}">
+    <tr>
+        <th>Property</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td><b>Id</b></td>
+        <td th:text="*{id}"></td>
+    </tr>
+    <tr>
+        <td><b>Manufacturer</b></td>
+        <td th:text="*{manufacturer}"></td>
+    </tr>
+    <tr>
+        <td><b>Model</b></td>
+        <td th:text="*{model}"></td>
+    </tr>
+    <tr>
+        <td><b>Fuel</b></td>
+        <td th:text="*{fuel}"></td>
+    </tr>
+    <tr>
+        <td><b>Production Year</b></td>
+        <td th:text="*{productionYear}"></td>
+    </tr>
+    <tr>
+        <td><b>Mileage</b></td>
+        <td th:text="*{mileage}"></td>
+    </tr>
+    <tr>
+        <td><b>Price</b></td>
+        <td th:text="*{price}"></td>
+    </tr>
+    <tr>
+        <td><b>Sold</b></td>
+        <td th:text="*{sold}"></td>
+    </tr>
+</table>
+</body>
+</html>

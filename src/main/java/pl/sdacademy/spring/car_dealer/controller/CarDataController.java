@@ -1,14 +1,19 @@
 package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
 import pl.sdacademy.spring.car_dealer.service.CarDataService;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 @Controller
+@RequestMapping("/vehicles")
 public class CarDataController {
 
     private final CarDataService carDataService;
@@ -60,5 +65,12 @@ public class CarDataController {
         } catch (NumberFormatException e) {
             return -1L;
         }
+    }
+
+    @RequestMapping("/{id}")
+    public String getCar(@PathVariable("id") Long vehicleId, Model model) {
+        Optional<Vehicle> foundVehicle = carDataService.getById(vehicleId);
+        foundVehicle.ifPresent(vehicle -> model.addAttribute("vehicle", vehicle));
+        return "vehicleDetails";
     }
 }

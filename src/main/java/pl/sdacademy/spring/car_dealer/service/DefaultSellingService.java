@@ -1,6 +1,8 @@
 package pl.sdacademy.spring.car_dealer.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
@@ -25,6 +27,8 @@ public class DefaultSellingService implements SellingService {
         this.purchaseRepository = purchaseRepository;
     }
 
+
+    @Transactional
     public Purchase sell(Long vehicleId, Customer customer, Long price) {
         Optional<Vehicle> optionalVehicle = vehicleRepository.findAvailableById(vehicleId);
         if (!optionalVehicle.isPresent()) {
@@ -33,6 +37,9 @@ public class DefaultSellingService implements SellingService {
             Vehicle vehicle = optionalVehicle.get();
             vehicle.setSold(true);
             vehicleRepository.save(vehicle);
+            if (true) {
+                throw new RuntimeException("Nope!");
+            }
             Optional<Customer> foundCustomer = customerRepository.findCustomerByDocumentNo(customer.getDocumentNo());
             Purchase purchase = new Purchase();
             purchase.setVehicle(vehicle);
@@ -40,7 +47,6 @@ public class DefaultSellingService implements SellingService {
             purchase.setDate(new Date());
             purchase.setPrice(price);
             return purchaseRepository.save(purchase);
-
         }
     }
 
@@ -48,7 +54,12 @@ public class DefaultSellingService implements SellingService {
         return purchaseRepository.findByCustomerDocumentNoEquals(documentNo);
     }
 
-    public List<Purchase> getPurchases (Long minPrice, Long maxPrice) {
-        return  purchaseRepository.findByPriceBetween(minPrice, maxPrice);
+    public List<Purchase> getPurchases(Long minPrice, Long maxPrice) {
+        return purchaseRepository.findByPriceBetween(minPrice, maxPrice);
+    }
+
+    @Override
+    public Optional<Purchase> getById(Long purchaseId) {
+        return purchaseRepository.findById(purchaseId);
     }
 }

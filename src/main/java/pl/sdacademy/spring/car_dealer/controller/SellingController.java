@@ -1,14 +1,20 @@
 package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
+import pl.sdacademy.spring.car_dealer.model.Vehicle;
 import pl.sdacademy.spring.car_dealer.service.SellingService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 @Controller
+@RequestMapping("/purchases")
 public class SellingController {
 
     private final SellingService sellingService;
@@ -89,5 +95,13 @@ public class SellingController {
             }
         }
     }
+
+    @RequestMapping("/{id}")
+    public String getPurchase(@PathVariable("id") Long purchaseId, Model model) {
+        Optional<Purchase> foundPurchase = sellingService.getById(purchaseId);
+        foundPurchase.ifPresent(purchase -> model.addAttribute("purchase", purchase));
+        return "purchaseDetails";
+    }
+
 }
 

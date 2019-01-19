@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Purchase details<</title>
+</head>
+<body>
+<h1>Purchase details</h1>
+<table th:object="${purchase}">
+    <tr>
+        <th>Property</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td><b>Id</b></td>
+        <td th:text="*{id}"></td>
+    </tr>
+    <tr>
+        <td><b>Date</b></td>
+        <td th:text="*{date}"></td>
+    </tr>
+    <tr>
+        <td><b>Vehicle</b></td>
+        <td><a th:href="@{/vehicles/{id}(id=*{vehicle.id})}"
+             th:text="*{vehicle.manufacturer} + ' ' + *{vehicle.model}">
+        </a></td>
+    </tr>
+    <tr>
+        <td><b>Price</b></td>
+        <td th:text="*{price}"></td>
+    </tr>
+
+</table>
+</body>
+</html>
