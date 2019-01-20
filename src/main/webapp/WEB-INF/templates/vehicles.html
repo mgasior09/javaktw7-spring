@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vehicle list</title></head>
+<body>
+<h1>Vehicles to sell</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th>Production year</th>
+        <th>Fuel</th>
+        <th>Mileage</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="vehicle, iterationInfo : ${vehicleList}">
+        <td th:text="${vehicle.id}"/>
+        <td th:text="${vehicle.manufacturer}"/>
+        <td th:text="${vehicle.model}"/>
+        <td th:text="${vehicle.productionYear}"/>
+        <td th:text="${vehicle.fuel}"/>
+        <td th:text="${vehicle.mileage}"/>
+        <td th:text="${vehicle.price}"/>
+    </tr>
+</table>
+
+</body>
+</html>

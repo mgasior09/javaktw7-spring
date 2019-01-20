@@ -22,19 +22,12 @@ public class CarDataController {
         this.carDataService = carDataService;
     }
 
-    public void printAvailableCars() {
+    @RequestMapping
+    public String printAvailableCars(Model model) {
         List<Vehicle> vehicles = carDataService.loadCarsThatCanBeSold();
         vehicles.sort(Comparator.comparing(Vehicle::getId));
-        vehicles.forEach(vehicle -> {
-            System.out.println(String.format("%d: %s %s from %d with %s powered engine and total mileage of %d for only %d!",
-                    vehicle.getId(),
-                    vehicle.getManufacturer(),
-                    vehicle.getModel(),
-                    vehicle.getProductionYear(),
-                    vehicle.getFuel(),
-                    vehicle.getMileage(),
-                    vehicle.getPrice()));
-        });
+       model.addAttribute("vehicleList", vehicles);
+        return "vehicles";
     }
 
     public void addVehicle() {
