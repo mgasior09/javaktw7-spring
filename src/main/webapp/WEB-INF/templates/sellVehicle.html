@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Sell in progress</title>
+    <style>
+        .fieldError{border-color: red}
+    </style>
 </head>
 <body>
 <h1>Selling a car</h1>
@@ -11,23 +14,32 @@
     <table>
         <tr>
             <td>Customer Name</td>
-            <td><input type="text" th:field="*{name}"/></td>
+            <td><input type="text" th:field="*{name}" th:errorclass="fieldError"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+            </td>
         </tr>
         <tr>
             <td>Customer Last Name</td>
-            <td><input type="text" th:field="*{surname}"/></td>
+            <td><input type="text" th:field="*{surname}" th:errorclass="fieldError"/>
+                <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"/></td>
         </tr>
         <tr>
             <td>Customer Document Number</td>
-            <td><input type="text" th:field="*{documentNo}"/></td>
+            <td><input type="text" th:field="*{documentNo}" th:errorclass="fieldError"/>
+                <span th:if="${#fields.hasErrors('documentNo')}" th:errors="*{documentNo}"/>
+            </td>
         </tr>
         <tr>
             <td>Customer telephone</td>
-            <td><input type="text" th:field="*{telephone}"/></td>
+            <td><input type="text" th:field="*{telephone}" th:errorclass="fieldError"/>
+                <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"/>
+            </td>
         </tr>
         <tr>
             <td>Price</td>
-            <td><input type="number" th:field="*{price}"/></td>
+            <td><input type="number" th:field="*{price}" th:errorclass="fieldError"/>
+                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit"/></td>

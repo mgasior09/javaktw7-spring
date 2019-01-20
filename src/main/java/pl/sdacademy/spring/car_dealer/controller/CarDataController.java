@@ -2,11 +2,13 @@ package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.spring.car_dealer.model.PurchaseFormData;
 import pl.sdacademy.spring.car_dealer.model.Vehicle;
 import pl.sdacademy.spring.car_dealer.service.CarDataService;
 
+import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +46,10 @@ public class CarDataController {
     }
 
     @PostMapping
-    public String saveVehicle(@ModelAttribute("addedVehicle") Vehicle vehicle) {
+    public String saveVehicle(@Valid @ModelAttribute("addedVehicle") Vehicle vehicle, BindingResult br) {
+        if (br.hasErrors()) {
+            return "addVehicle";
+        }
         carDataService.addVehicle(vehicle);
         return "redirect:/vehicles";
     }

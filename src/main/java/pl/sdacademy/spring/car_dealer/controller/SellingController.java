@@ -2,6 +2,7 @@ package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import pl.sdacademy.spring.car_dealer.model.Purchase;
 import pl.sdacademy.spring.car_dealer.model.PurchaseFormData;
 import pl.sdacademy.spring.car_dealer.service.SellingService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -106,7 +108,10 @@ public class SellingController {
     }
 
     @PostMapping
-    public String sellVehicle(@ModelAttribute("formData") PurchaseFormData formData) {
+    public String sellVehicle(@Valid @ModelAttribute("formData") PurchaseFormData formData, BindingResult br) {
+        if (br.hasErrors()) {
+            return "sellVehicle";
+        }
         Customer customer = new Customer();
         customer.setName(formData.getName());
         customer.setSurname(formData.getSurname());
@@ -115,6 +120,5 @@ public class SellingController {
         sellingService.sell(formData.getVehicleId(), customer, formData.getPrice());
         return "redirect:/vehicles";
     }
-
 }
 

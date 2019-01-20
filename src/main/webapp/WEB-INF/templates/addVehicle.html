@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add vehicle</title>
+
 </head>
 <body>
 <h1>Add vehicle details</h1>
@@ -9,27 +10,39 @@
     <table>
         <tr>
             <td>Manufacturer</td>
-            <td><input type="text" th:field="*{manufacturer}"/></td>
+            <td><input type="text" th:field="*{manufacturer}"/>
+                <span th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"/>
+            </td>
         </tr>
         <tr>
             <td>Model</td>
-            <td><input type="text" th:field="*{model}"/></td>
+            <td><input type="text" th:field="*{model}"/>
+                <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}"/>
+            </td>
         </tr>
         <tr>
             <td>Production Year</td>
-            <td><input type="number" th:field="*{productionYear}"/></td>
+            <td><input type="number" th:field="*{productionYear}"/>
+                <span th:if="${#fields.hasErrors('productionYear')}" th:errors="*{productionYear}"/></td>
         </tr>
         <tr>
             <td>Mileage</td>
-            <td><input type="number" th:field="*{mileage}"/></td>
+            <td><input type="number" th:field="*{mileage}"/>
+                <span th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"/>
+            </td>
         </tr>
         <tr>
             <td>Fuel</td>
-            <td><input type="text"  th:field="*{fuel}"/></td>
+            <td><input type="text"  th:field="*{fuel}"/>
+                <span th:if="${#fields.hasErrors('fuel')}" th:errors="*{fuel}"/>
+            </td>
         </tr>
         <tr>
             <td>Price</td>
-            <td><input type="number"  th:field="*{price}"/></td>
+            <td><input type="number"  th:field="*{price}"/>
+                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"/>
+
+            </td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit"/></td>
