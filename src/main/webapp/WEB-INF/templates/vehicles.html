@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Vehicle list</title>
+    <title>Vehicles to sell</title>
 </head>
 <body>
 <h1>Vehicles to sell</h1>
@@ -24,8 +24,12 @@
         <td th:text="${vehicle.fuel}"/>
         <td th:text="${vehicle.mileage}"/>
         <td th:text="${vehicle.price}"/>
+        <td><a th:href="@{/vehicles/{vehicleId}/sell(vehicleId=*{vehicle.id})}"
+               th:text="Sell"/></td>
     </tr>
 </table>
-
+<form th:action="@{/vehicles/add}" method="get">
+    <input type="submit"/>
+</form>
 </body>
 </html>

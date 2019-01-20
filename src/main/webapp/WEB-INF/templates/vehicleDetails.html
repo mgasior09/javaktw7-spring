@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thymeleaf Vehicle details<</title>
+    <title>Vehicle details<</title>
 </head>
 <body>
-<h1>Thymeleaf Vehicle details</h1>
-<p>Vehicle details</p>
+<h1>Vehicle details</h1>
 <table th:object="${vehicle}">
     <tr>
         <th>Property</th>
@@ -44,8 +43,6 @@
         <td th:text="*{sold}"></td>
     </tr>
 </table>
-<form th:action="@{/add}" method="get">
-    <input type="submit">Add vehicle </input>
-</form>
+
 </body>
 </html>

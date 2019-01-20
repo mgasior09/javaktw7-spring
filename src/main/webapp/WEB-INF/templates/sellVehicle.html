@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sell in progress</title>
+</head>
+<body>
+<h1>Selling a car</h1>
+
+<form th:action="@{/purchases}" method="post" th:object="${formData}">
+    <input type="hidden" th:field="*{vehicleId}" th:attr="name='vehicleId'">
+    <table>
+        <tr>
+            <td>Customer Name</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Customer Last Name</td>
+            <td><input type="text" th:field="*{surname}"/></td>
+        </tr>
+        <tr>
+            <td>Customer Document Number</td>
+            <td><input type="text" th:field="*{documentNo}"/></td>
+        </tr>
+        <tr>
+            <td>Customer telephone</td>
+            <td><input type="text" th:field="*{telephone}"/></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="number" th:field="*{price}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

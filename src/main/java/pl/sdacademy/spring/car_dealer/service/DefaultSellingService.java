@@ -1,7 +1,6 @@
 package pl.sdacademy.spring.car_dealer.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
@@ -37,9 +36,6 @@ public class DefaultSellingService implements SellingService {
             Vehicle vehicle = optionalVehicle.get();
             vehicle.setSold(true);
             vehicleRepository.save(vehicle);
-            if (true) {
-                throw new RuntimeException("Nope!");
-            }
             Optional<Customer> foundCustomer = customerRepository.findCustomerByDocumentNo(customer.getDocumentNo());
             Purchase purchase = new Purchase();
             purchase.setVehicle(vehicle);

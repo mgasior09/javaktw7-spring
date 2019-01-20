@@ -2,11 +2,13 @@ package pl.sdacademy.spring.car_dealer.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sdacademy.spring.car_dealer.model.Customer;
 import pl.sdacademy.spring.car_dealer.model.Purchase;
-import pl.sdacademy.spring.car_dealer.model.Vehicle;
+import pl.sdacademy.spring.car_dealer.model.PurchaseFormData;
 import pl.sdacademy.spring.car_dealer.service.SellingService;
 
 import java.util.List;
@@ -101,6 +103,17 @@ public class SellingController {
         Optional<Purchase> foundPurchase = sellingService.getById(purchaseId);
         foundPurchase.ifPresent(purchase -> model.addAttribute("purchase", purchase));
         return "purchaseDetails";
+    }
+
+    @PostMapping
+    public String sellVehicle(@ModelAttribute("formData") PurchaseFormData formData) {
+        Customer customer = new Customer();
+        customer.setName(formData.getName());
+        customer.setSurname(formData.getSurname());
+        customer.setDocumentNo(formData.getDocumentNo());
+        customer.setTelephone(formData.getTelephone());
+        sellingService.sell(formData.getVehicleId(), customer, formData.getPrice());
+        return "redirect:/vehicles";
     }
 
 }
