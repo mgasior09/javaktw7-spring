@@ -30,8 +30,12 @@ public class RestVehicleController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Vehicle addVehicle(@Valid @RequestBody Vehicle vehicle) {
-      return   vehicleRepository.save(vehicle);
+        return vehicleRepository.save(vehicle);
     }
 
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Vehicle updateVehicle(@Valid @RequestBody Vehicle vehicle) {
+        return vehicleRepository.save(vehicle);
+    }
 
 }
